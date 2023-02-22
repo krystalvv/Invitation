@@ -1,31 +1,13 @@
-import React, { useCallback, useState } from 'react';
-import { moment } from 'moment';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { addDays, parse } from 'date-fns';
 import 'moment/locale/ko';
-import { MdEdit } from 'react-icons/md'
-import { Card, CardItem } from '../component/Card';
-import Select from '../component/Select';
-import { Col, Input, Row, Button } from 'reactstrap';
 import Forms from './Forms';
 
 const Main = () => {
   const dateArray = ['일', '월', '화', '수', '목', '금', '토']
   const [date, setdate] = useState(new Date())
-
-  const handleMouseOver = useCallback((e) => {
-    if (e.currentTarget = e.target) {
-      e.target.classList.add("preview_06_bottom_button_hover")
-    }
-    else {
-      e.target.classList.remove("preview_06_bottom_button_hover")
-    }
-  }, [])
-
-  const handleMouseLeave = useCallback((e) => {
-    e.target.classList.remove("preview_06_bottom_button_hover")
-  }, [])
 
   const timeFormat = (time) => {
     if (time - 12 > 0)
@@ -194,9 +176,9 @@ const Main = () => {
                     </div>
                     <hr className="calendar-week_hairline"></hr>
                     <div className='preview_06_bottom'>
-                      <div className='preview_06_bottom_button' style={{ paddingTop: '5px', alignItems: 'center', justifyContent: 'center' }} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
-                        방명록 남기기
-                      </div>
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', padding: 10 }}>
+                            <div className='button'>벙명록 남기기</div>
+                        </div>
 
                     </div>
                   </div>

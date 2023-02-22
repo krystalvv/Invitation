@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import 'moment/locale/ko';
 import { Card, CardItem } from '../component/Card';
 import Select from '../component/Select';
-import { Col, Input, Row, Button } from 'reactstrap';
+import { Input, Row } from 'reactstrap';
 import { FileUploader } from "react-drag-drop-files";
-import moment from 'moment';
 
 
 const Forms = () => {
@@ -36,19 +35,19 @@ const Forms = () => {
                     renderItem={
                         <div style={{ display: 'flex', flex: 1, overflow: 'auto', whiteSpace: 'nowrap' }}>
                             <div onClick={() => setType(0)} style={{ display: 'inline-block', width: '30%', padding: 15, border: '1px solid #d9d9d9', borderWidth: type === 0 ? 1 : 0, backgroundColor: type === 0 ? '#f5f5f5' : 'white' }}>
-                                <img src='https://moinvi.com/img/theme_sample_02.png' style={{ width: '100%', height: 'auto', boxShadow: '0 0 6px 2px #d9d9d9' }}></img>
+                                <img alt="img1" src='https://moinvi.com/img/theme_sample_02.png' style={{ width: '100%', height: 'auto', boxShadow: '0 0 6px 2px #d9d9d9' }}></img>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 30 }}>
                                     <p style={{ fontSize: '0.8em' }}> 타입 A</p>
                                 </div>
                             </div>
                             <div onClick={() => setType(1)} style={{ display: 'inline-block', width: '30%', padding: 15, border: '1px solid #d9d9d9', borderWidth: type === 1 ? 1 : 0, backgroundColor: type === 1 ? '#f5f5f5' : 'white' }}>
-                                <img src='https://moinvi.com/img/theme_sample_00.png' style={{ width: '100%', height: 'auto', boxShadow: '0 0 6px 2px #d9d9d9' }}></img>
+                                <img alt="img2" src='https://moinvi.com/img/theme_sample_00.png' style={{ width: '100%', height: 'auto', boxShadow: '0 0 6px 2px #d9d9d9' }}></img>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 30 }}>
                                     <p style={{ fontSize: '0.8em' }}> 타입 B</p>
                                 </div>
                             </div>
                             <div onClick={() => setType(2)} style={{ display: 'inline-block', width: "30%", padding: 15, border: '1px solid #d9d9d9', borderWidth: type === 2 ? 1 : 0, backgroundColor: type === 2 ? '#f5f5f5' : 'white' }}>
-                                <img src='https://moinvi.com/img/theme_sample_01.png' style={{ width: '100%', height: 'auto', boxShadow: '0 0 6px 2px #d9d9d9' }}></img>
+                                <img alt="img3" src='https://moinvi.com/img/theme_sample_01.png' style={{ width: '100%', height: 'auto', boxShadow: '0 0 6px 2px #d9d9d9' }}></img>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 30 }}>
                                     <p style={{ fontSize: '0.8em' }}> 타입 C</p>
                                 </div>
