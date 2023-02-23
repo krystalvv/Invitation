@@ -27,15 +27,13 @@ const Forms = (props) => {
 
 	function selectDirect(index) {
 		setDirect(index);
-		accountComponent();
-
 		console.log(index);
 	}
 
 	function getAccountInfo(e, index, item) {
 		let totalAccount = props.accountNumber;
 		let accountInfo;
-		if (direct !== 0)
+		if (direct === 0)
 			accountInfo = totalAccount.groom;
 		else
 			accountInfo = totalAccount.bride;
@@ -82,34 +80,67 @@ const Forms = (props) => {
 		)
 	}
 
-	function accountComponent() {
+	function accountGroom() {
 		let accountList = [];
-		let count = direct === 0 ? props.accountNumber.groom.length : props.accountNumber.bride.length
-
+		let count = props.accountNumber.groom.length
 		let totalAccount = props.accountNumber;
-		let accountInfo;
-		if (direct === 0)
-			accountInfo = totalAccount.groom;
-		else
-			accountInfo = totalAccount.bride;
+
+		let accountInfo = totalAccount.groom;
 
 		for (let i = 0; i < count; i++) {
 			let currentAccount = accountInfo[i]
+			console.log(direct, currentAccount.nickname)
 			accountList.push(
 				<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
 					<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='호칭' onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
+						<Input className='input' type="text" placeholder='호칭' defaultValue={'asdfsad'} onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
 					</div>
 					<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='예금주' onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
-						<Input className='input' type="text" placeholder='은행' onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
+						<Input className='input' type="text" placeholder='예금주' defaultValue={currentAccount.name} onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
+						<Input className='input' type="text" placeholder='은행'  defaultValue={currentAccount.bank} onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
 					</div>
-					<Input className='input' type="text" placeholder='계좌번호' onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
+					<Input className='input' type="text" placeholder='계좌번호' defaultValue={currentAccount.account} onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
 				</div>
 			);
 		}
 
-		setAccountComponent(accountList);
+		return (
+			<div>
+				{accountList}
+			</div>
+		)
+
+	}
+
+	function accountBride() {
+		let accountList = [];
+		let count = props.accountNumber.bride.length
+		let totalAccount = props.accountNumber;
+
+		let accountInfo = totalAccount.bride;
+
+		for (let i = 0; i < count; i++) {
+			let currentAccount = accountInfo[i]
+			console.log(direct, currentAccount.nickname)
+			accountList.push(
+				<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
+					<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
+						<Input className='input' type="text" placeholder='호칭' defaultValue={'eeee'} onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
+					</div>
+					<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
+						<Input className='input' type="text" placeholder='예금주' defaultValue={currentAccount.name} onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
+						<Input className='input' type="text" placeholder='은행'  defaultValue={currentAccount.bank} onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
+					</div>
+					<Input className='input' type="text" placeholder='계좌번호' defaultValue={currentAccount.account} onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
+				</div>
+			);
+		}
+
+		return (
+			<div>
+				{accountList}
+			</div>
+		)
 	}
 
 	const setColor = (index) => {
@@ -187,7 +218,7 @@ const Forms = (props) => {
 
 
 	return (
-		<form className="form" onLoad={() => selectDirect(1)}>
+		<form className="form">
 			<Card title={'템플릿'}>
 				<CardItem
 					title={'스타일'}
@@ -547,17 +578,55 @@ const Forms = (props) => {
 				<CardItem
 					title={'버튼 이름'}
 					renderItem={
-						<Select list={['신랑측 계좌번호', '신부측 계좌번호']} onSelected={(index) => selectDirect(index)} />
+						<Select list={['신랑측 계좌번호', '신부측 계좌번호']} onSelected={selectDirect} />
 					}
 				/>
+
 				<CardItem
+					hide = {direct === 1}
 					title={'계좌'}
 					renderItem={
-						<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
-							{accountComponentList}
+						<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em'}}>
+							{
+								props.accountNumber.groom.map((value, i) => (
+									<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
+									<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
+										<Input className='input' type="text" placeholder='호칭' onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
+									</div>
+									<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
+										<Input className='input' type="text" placeholder='예금주' onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
+										<Input className='input' type="text" placeholder='은행'  onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
+									</div>
+									<Input className='input' type="text" placeholder='계좌번호' onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
+								</div>
+								))
+							}
 						</div>
 					}
 				/>
+								<CardItem
+								hide = {direct === 0}
+					title={'계좌'}
+					renderItem={
+						<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
+							{
+								props.accountNumber.bride.map((value, i) => (
+									<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
+									<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
+										<Input className='input' type="text" placeholder='호칭'  onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
+									</div>
+									<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
+										<Input className='input' type="text" placeholder='예금주'  onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
+										<Input className='input' type="text" placeholder='은행'  onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
+									</div>
+									<Input className='input' type="text" placeholder='계좌번호' onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
+								</div>
+								))
+							}
+						</div>
+					}
+				/>
+			
 				{/* {splite()}
 				<CardItem
 					title={''}
