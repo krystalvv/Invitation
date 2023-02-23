@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-const Select = ({ list }) => {
+const Select = ({ list, onSelected }) => {
 	const [open, setOpen] = useState(false);
 	const [selIndex, setIndex] = useState(0);
 
 	function selectIndex (index) {
 		setOpen(false);
 		setIndex(index);
+		onSelected(index);
 	}
 
 	return (
