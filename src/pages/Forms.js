@@ -28,6 +28,8 @@ const Forms = (props) => {
 	function selectDirect(index) {
 		setDirect(index);
 		accountComponent();
+
+		console.log(index);
 	}
 
 	function getAccountInfo(e, index, item) {
@@ -55,6 +57,7 @@ const Forms = (props) => {
 
 		accountInfo[index] = currentAccount;
 		props.setAccountNumber(totalAccount);
+		props.forceUpdate();
 	}
 
 	function setMainImage(file) {
@@ -79,13 +82,13 @@ const Forms = (props) => {
 		)
 	}
 
-	function accountComponent(edit) {
+	function accountComponent() {
 		let accountList = [];
-		let count = direct !== 0 ? props.accountNumber.groom.length : props.accountNumber.bride.length
+		let count = direct === 0 ? props.accountNumber.groom.length : props.accountNumber.bride.length
 
 		let totalAccount = props.accountNumber;
 		let accountInfo;
-		if (direct !== 0)
+		if (direct === 0)
 			accountInfo = totalAccount.groom;
 		else
 			accountInfo = totalAccount.bride;
