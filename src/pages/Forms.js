@@ -79,7 +79,7 @@ const Forms = (props) => {
 		)
 	}
 
-	function accountComponent() {
+	function accountComponent(edit) {
 		let accountList = [];
 		let count = direct !== 0 ? props.accountNumber.groom.length : props.accountNumber.bride.length
 
@@ -95,13 +95,13 @@ const Forms = (props) => {
 			accountList.push(
 				<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
 					<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='호칭' value={currentAccount.nickname} onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
+						<Input className='input' type="text" placeholder='호칭' onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
 					</div>
 					<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='예금주' value={currentAccount.name} onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
-						<Input className='input' type="text" placeholder='은행' value={currentAccount.back} onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
+						<Input className='input' type="text" placeholder='예금주' onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
+						<Input className='input' type="text" placeholder='은행' onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
 					</div>
-					<Input className='input' type="text" placeholder='계좌번호' value={currentAccount.account} onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
+					<Input className='input' type="text" placeholder='계좌번호' onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
 				</div>
 			);
 		}
@@ -184,7 +184,7 @@ const Forms = (props) => {
 
 
 	return (
-		<form className="form" onLoad={() => selectDirect(0)}>
+		<form className="form" onLoad={() => selectDirect(1)}>
 			<Card title={'템플릿'}>
 				<CardItem
 					title={'스타일'}
