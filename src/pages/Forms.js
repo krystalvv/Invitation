@@ -362,8 +362,8 @@ const Forms = (props) => {
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
 							<Input className="input" type='text' placeholder='이름' onChange={(e) => { props.setGroomFather(e.target.value) }} />
-							<Input className="checkbox" type='checkbox' />
-							<div className="label">고인</div>
+							{/* <Input className="checkbox" type='checkbox' />
+							<div className="label">고인</div> */}
 						</div>
 					}
 				/>
@@ -372,8 +372,8 @@ const Forms = (props) => {
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
 							<Input className="input" type='text' placeholder='이름' onChange={(e) => { props.setGroomMather(e.target.value) }} />
-							<Input className="checkbox" type='checkbox' />
-							<div className="label">고인</div>
+							{/* <Input className="checkbox" type='checkbox' />
+							<div className="label">고인</div> */}
 						</div>
 					}
 				/>
@@ -394,8 +394,8 @@ const Forms = (props) => {
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
 							<Input className="input" type='text' placeholder='이름' onChange={(e) => { props.setBrideFather(e.target.value) }} />
-							<Input className="checkbox" type='checkbox' />
-							<div className="label">고인</div>
+							{/* <Input className="checkbox" type='checkbox' />
+							<div className="label">고인</div> */}
 						</div>
 					}
 				/>
@@ -404,8 +404,8 @@ const Forms = (props) => {
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
 							<Input className="input" type='text' placeholder='이름' onChange={(e) => (props.setBrideMather({name:e.target.value, leaved:props.brideMather.leaved}) )} />
-							<Input className="checkbox" type='checkbox' onChange={(e) => (props.setBrideMather({name:props.brideMather.name, leaved:e.checked}))} />
-							<div className="label">고인</div>
+							{/* <Input className="checkbox" type='checkbox' onChange={(e) => (props.setBrideMather({name:props.brideMather.name, leaved:e.checked}))} />
+							<div className="label">고인</div> */}
 						</div>
 					}
 				/>
