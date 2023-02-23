@@ -54,7 +54,6 @@ const InsertImage = ({ name, setMainImage, ...restProps }) => {
     { mainImg && 
     <div style={{ margin: "0px" }}>
     <label for={name}>
-        <MdEdit className="can-click" size={20} style={{ margin: "5px" }} />
         <MdDelete className="can-click" size={20} style={{ margin: "5px" }} onClick={handleDeleteFile} />
       </label>
       <Input type="file" accept='image/jpg,impge/png,image/jpeg,image/gif'  name={name} id={name} onChange={handleChangeFile} style={{ display: "none" }} />

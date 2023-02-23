@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import 'moment/locale/ko';
 import { Card, CardItem } from '../component/Card';
 import Select from '../component/Select';
@@ -21,6 +21,9 @@ const Forms = (props) => {
 	const [file, setFile] = useState(null);
 	const [direct, setDirect] = useState(0);
 	const [accountComponentList, setAccountComponent] = useState();
+
+	const [, updateState] = useState();
+	const forceUpdate = useCallback(()=>updateState({}), []);
 
 	function selectDirect(index) {
 		setDirect(index);
@@ -66,6 +69,8 @@ const Forms = (props) => {
 		list.push(URL.createObjectURL(file));
 
 		props.setGallery(list);
+
+		props.forceUpdate()
 	};
 
 	function splite() {
@@ -118,6 +123,8 @@ const Forms = (props) => {
 		date.setDate(parseInt(strDate[2]));
 
 		props.setdate(date)
+
+		props.forceUpdate()
 	}
 
 	const changeTime = (e) => {
@@ -145,17 +152,29 @@ const Forms = (props) => {
 		props.setCalendarStyle(index)
 	};
 
+	const update = useCallback()
+
+	const deleteImage = (i) => {
+		let list = props.gallery;
+		console.log(list)
+		list.splice(i, 1);
+		console.log(list)
+		props.setGallery(list);
+
+		forceUpdate()
+	}
+
 	function getImageList() {
 		let images = [];
 		for (let i = 0; i < props.gallery.length; i++) {
-			images.push(<div style={{ width: 100, height: 100, margin: 5 }}>
-				<img src={props.gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }} />
+			images.push(<div style={{ width: 100, height: 100, margin: 5, cursor:'pointer' }} onClick={() => deleteImage(i)}>
+				<img src={props.gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }}/>
 			</div>);
 		}
 
 		return (
 			<div style={{ display: 'block' }}>
-				<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+				<div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
 					{images}
 				</div>
 			</div>
@@ -351,8 +370,8 @@ const Forms = (props) => {
 					title={'어머니'}
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-							<Input className="input" type='text' placeholder='이름' onChange={(e) => { props.setBrideMather(e.target.value) }} />
-							<Input className="checkbox" type='checkbox' />
+							<Input className="input" type='text' placeholder='이름' onChange={(e) => (props.setBrideMather({name:e.target.value, leaved:props.brideMather.leaved}) )} />
+							<Input className="checkbox" type='checkbox' onChange={(e) => (props.setBrideMather({name:props.brideMather.name, leaved:e.checked}))} />
 							<div className="label">고인</div>
 						</div>
 					}
@@ -386,12 +405,12 @@ const Forms = (props) => {
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
 							<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-								<Input className="radio" type='radio'></Input>
+								<Input className="radio" type='radio'  checked={props.galleryType === true} onChange={() => props.setGalleryType(true)}></Input>
 								<div style={{ fontSize: '0.9em' }}>스와이프</div>
 							</div>
 							<div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-								<Input className="radio" type='radio'></Input>
-								<div style={{ fontSize: '0.9em' }}>그리드</div>
+								<Input className="radio" type='radio' checked={props.galleryType === false} onChange={() => props.setGalleryType(false)}></Input>
+								<div style={{ fontSize: '0.9em' }} >그리드</div>
 							</div>
 						</div>
 					}

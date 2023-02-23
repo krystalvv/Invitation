@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { addDays, parse } from 'date-fns';
@@ -12,6 +12,9 @@ import Slider from 'react-slick';
 
 const Main = () => {
   const dateArray = ['일', '월', '화', '수', '목', '금', '토']
+
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   //# useState
   const [templateStyle, setTemplateStyle] = useState(0);
@@ -35,15 +38,15 @@ const Main = () => {
   const [groomRelative, setGroomRelative] = useState('아들');
   const [brideName, setBrideName] = useState('');
   const [brideFather, setBrideFather] = useState('');
-  const [brideMather, setBrideMather] = useState('');
-  const [brideRelative, setBriderRelative] = useState('딸');
+  const [brideMather, setBrideMather] = useState({name: '', leaved: false});
+  const [brideRelative, setBrideRelative] = useState('딸');
 
   const [calendarStyle, setCalendarStyle] = useState(0);
 
-  const [date, setdate] = useState(new Date())
-  const [time, setTime] = useState("")
+  const [date, setdate] = useState(new Date());
+  const [time, setTime] = useState("");
 
-  const [dDay, setVisibleDday] = useState(true)
+  const [dDay, setVisibleDday] = useState(true);
 
   const [gallery, setGallery] = useState([]);
 
@@ -96,14 +99,35 @@ const Main = () => {
     }]
   });
 
-  const timeFormat = (time) => {
-    if (time - 12 > 0)
-      return `오후 ${time - 12}`
-    else if (time === 0)
-      return `오전 12`
-    else
-      return `오전 ${time}`
+  const [galleryType, setGalleryType] = useState(true);
+
+  const getDDay = () => {
+    // D-Day 날짜 지정
+    const now = new Date();
+    const distance = date.getTime() - now.getTime();
+    const day = Math.floor(distance / (1000 * 60 * 60 * 24));
+    return day + 1;
   }
+
+
+  function getImageList() {
+    let images = [];
+    for (let i = 0; i < gallery.length; i++) {
+      images.push(<div style={{ width: 110, height: 110, margin: 5, cursor: 'pointer' }}>
+        <img src={gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }} />
+      </div>);
+    }
+
+    return (
+      <div style={{ display: 'block' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+          {images}
+        </div>
+      </div>
+    )
+
+  }
+
 
   const RenderCells = ({ currentMonth, onDateClick }) => {
     const monthStart = startOfMonth(currentMonth);
@@ -155,40 +179,20 @@ const Main = () => {
                 <div style={{ marginBottom: '4em' }}>
                   <div className="preview_01">
                     <div style={{ width: '100%', height: '100%' }}>
-                      {templateType === 0 &&
-                        <>
-                          {templateStyle === 0 &&
-                            <div className="preview_01_name">
-                              <div style={{ height: '20%' }}></div>
-                              <div style={{ height: '80%' }}>
-                                <div className="preview_01_name_01">
-                                  <div className="preview_01_name_01_text" style={{ color: templateThemeColor }}>{templateDate}</div>
-                                </div>
-                                <div className="preview_01_name_02">
-                                  <div className="preview_01_name_02_text_01" style={{ color: templateThemeColor }}>{templateGroom}</div>
-                                  <div className="preview_01_name_02_text_02" style={{ color: templateThemeColor }}>그리고</div>
-                                  <div className="preview_01_name_02_text_03" style={{ color: templateThemeColor }}>{templateBride}</div>
-                                </div>
-                                <div style={{ textAlign: 'center', fontSize: 11, marginTop: -15 }}>
-                                  {templateSpace}
-                                </div>
-                              </div>
-                            </div>
-                          }
+                      {templateStyle === 1 &&
 
-                          <div className="preview_01_image">
-                            <div style={{ height: '100%' }}>
-                              {templateImage ? <img style={{ width: "100%" }} src={templateImage}></img> : <div>
-                                {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
-                              }
-                            </div>
+                        <div className="preview_01_image" style={{ backgroundColor:templateImage?'white':'#e5e5e5',minHeight: templateImage ? 0 : 600 }}>
+                          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                            {templateImage ? <img style={{ width: "100%" }} src={templateImage}></img> : <div>
+                              {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
+                            }
                           </div>
-                        </>
+                        </div>
                       }
-                      {templateType === 1 &&
-                        <div style={{ height: '100%', padding: '5%', backgroundColor: '#e5e5e5' }}>
-                          <div style={{ position: 'absolute', width: '90%', height: '95%', border: '2px solid', borderColor: templateLineColor }}>
-                            <div style={{ position: 'absolute', width: '98%', height: '99%', marginLeft: 2, marginTop: 2, border: '1px solid', borderColor: templateLineColor }}>
+                      {templateStyle === 0 &&
+                        <>
+                          {templateType === 0 &&
+                            <>
                               {templateStyle === 0 &&
                                 <div className="preview_01_name">
                                   <div style={{ height: '20%' }}></div>
@@ -207,40 +211,73 @@ const Main = () => {
                                   </div>
                                 </div>
                               }
-                              <div className="preview_01_image">
-                                {'[첫 화면] 에 이미지를 첨부해주세요.'}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      }
-                      {templateType === 2 &&
-                        <>
-                          {templateStyle === 0 &&
-                            <div className="preview_01_name">
-                              <div style={{ height: '20%' }}></div>
-                              <div style={{ height: '80%' }}>
-                                <div className="preview_01_name_01">
-                                  <div className="preview_01_name_01_text" style={{ color: templateThemeColor }}>{templateDate}</div>
-                                </div>
-                                <div className="preview_01_name_02">
-                                  <div className="preview_01_name_02_text_01" style={{ color: templateThemeColor }}>{templateGroom}</div>
-                                  <div className="preview_01_name_02_text_02" style={{ color: templateThemeColor }}>그리고</div>
-                                  <div className="preview_01_name_02_text_03" style={{ color: templateThemeColor }}>{templateBride}</div>
-                                </div>
-                                <div style={{ textAlign: 'center', fontSize: 11, marginTop: -15 }}>
-                                  {templateSpace}
+
+                              <div className="preview_01_image" style={{ backgroundColor: templateImage ? 'white' : '#e5e5e5', minHeight: templateImage ? 0 : 400 }}>
+                                <img style={{ width: '100%' }} src={templateImage}></img>
+                                <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                                  {templateImage ? <div /> : <div>
+                                    {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
+                                  }
                                 </div>
                               </div>
+                            </>
+                          }
+                          {templateType === 1 &&
+                            <div style={{ height: '100%', justifyContent: 'center', backgroundColor: templateImage ? 'white' : '#e5e5e5', alignItems: 'center', flexDirection: 'column', padding: "3%" }}>
+                              <img style={{ position: 'absolute', width: '94%', border: '2px solid', borderColor: templateLineColor }} src={templateImage}></img>
+                              <div style={{ position: 'absolute', minHeight: templateImage ? 0 : 570, width: '88%', display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: 10 }}>
+                                <div style={{ display: 'flex', flex: 1, alignItems: 'center', flexDirection: 'column', padding: 10 }}>
+                                  <div className="preview_01_name">
+                                    <div style={{ height: '20%' }}></div>
+                                    <div style={{ height: '80%' }}>
+                                      <div className="preview_01_name_01">
+                                        <div style={{ color: templateThemeColor, fontSize: 12 }}>{templateDate}</div>
+                                      </div>
+                                      <div className="preview_01_name_02">
+                                        <div className="preview_01_name_02_text_01" style={{ color: templateThemeColor }}>{templateGroom}</div>
+                                        <div style={{ color: templateThemeColor, fontSize: 20, width: 100, textAlign: 'center' }}>&</div>
+                                        <div className="preview_01_name_02_text_03" style={{ color: templateThemeColor }}>{templateBride}</div>
+                                      </div>
+                                      <div style={{ textAlign: 'center', fontSize: 11, marginTop: -15 }}>
+                                        {templateSpace}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
                             </div>
                           }
-                          <div className="preview_01_image" style={{ border: '2px solid', borderColor: templateLineColor, margin: 10 }}>
-                            <div style={{ border: '1px solid', padding: 2, width: '97%', height: '98%', borderColor: templateLineColor }}>
-                              <div style={{ flex: 1, alignItems: 'center', justifyContent: 'center', display: 'flex', height: '100%' }}>
-                                {'[첫 화면] 에 이미지를 첨부해주세요.'}
+                          {templateType === 2 &&
+                            <>
+                              {templateStyle === 0 &&
+                                <div className="preview_01_name">
+                                  <div style={{ height: '20%' }}></div>
+                                  <div style={{ height: '80%' }}>
+                                    <div className="preview_01_name_01">
+                                      <div style={{ color: templateThemeColor, fontSize: 12 }}>{templateDate}</div>
+                                    </div>
+                                    <div className="preview_01_name_02">
+                                      <div className="preview_01_name_02_text_01" style={{ color: templateThemeColor }}>{templateGroom}</div>
+                                      <div style={{ color: templateThemeColor, fontSize: 20, width: 100, textAlign: 'center' }}>&</div>
+                                      <div className="preview_01_name_02_text_03" style={{ color: templateThemeColor }}>{templateBride}</div>
+                                    </div>
+                                    <div style={{ textAlign: 'center', fontSize: 11, marginTop: -15 }}>
+                                      {templateSpace}
+                                    </div>
+                                  </div>
+                                </div>
+                              }
+                              <div className="preview_01_image" style={{ flex: 1, display: 'flex', border: '2px solid', borderColor: templateLineColor, margin: 10 }}>
+                                {templateImage && <img style={{ width: '100%' }} src={templateImage}></img>}
+                                <div style={{ width:'100%', flex: 1, display: 'flex', justifyContent: 'center', alignItems:'center' }}>
+                                  {templateImage ? <div /> : <div style={{textAlign:'center'}}>
+                                    {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
+                                  }
+                                </div>
                               </div>
-                            </div>
-                          </div>
+                            </>
+                          }
                         </>
                       }
                     </div>
@@ -261,7 +298,7 @@ const Main = () => {
                       <div style={{ fontWeight: 'bold' }}>{groomFather}•{groomMather}</div><div style={{ fontSize: 13, color: '#8c8c8c' }}>&nbsp;의&nbsp;{groomRelative}</div>&nbsp;<div style={{ fontWeight: 'bold' }}>{groomName}</div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 5 }}>
-                      <div style={{ fontWeight: 'bold' }}>{brideFather}•{brideMather}</div><div style={{ fontSize: 13, color: '#8c8c8c' }}>&nbsp;의&nbsp;{brideRelative}</div>&nbsp;<div style={{ fontWeight: 'bold' }}> {brideName}</div>
+                      <div style={{ fontWeight: 'bold' }}>{brideFather}•{brideMather.leaved ? '故' + brideMather.name : brideMather.name}</div><div style={{ fontSize: 13, color: '#8c8c8c' }}>&nbsp;의&nbsp;{brideRelative}</div>&nbsp;<div style={{ fontWeight: 'bold' }}> {brideName}</div>
                     </div>
                   </div>
                 </div>
@@ -269,7 +306,7 @@ const Main = () => {
                 <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
                   <div className="preview_03">
                     <div style={{ paddingBottom: '2rem' }}>
-                      <div className="preview_03_month" style={{ color: templateThemeColor }}>{date.getMonth() + 1}월 {date.getDate()}일</div>
+                      <div className="preview_03_month" style={{ color: templateThemeColor }} key={date}>{date.getMonth() + 1}월 {date.getDate()}일</div>
                       <div className="preview_03_splite" />
                     </div>
                     <div style={{ paddingLeft: '2rem', paddingRight: '2rem' }}>
@@ -292,11 +329,11 @@ const Main = () => {
                       </div>
                       {dDay &&
                         <div className='preview_03_text_01' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                          <span>OOO</span>
+                          <span>{groomName}</span>
                           <span className='preview_03_text_02'>♥︎</span>
-                          <span>OOO</span>
+                          <span>{brideName}</span>
                           <span>의 결혼식이</span>
-                          <span className='preview_03_text_03'>&nbsp;0일&nbsp;</span>
+                          <span className='preview_03_text_03'>&nbsp;{getDDay()}일&nbsp;</span>
                           <span>남았습니다.</span>
                         </div>
                       }
@@ -314,13 +351,20 @@ const Main = () => {
                   <div>
 
                   </div>
-                  <div className="preview_04_image">
-                    {'[갤러리] 에 이미지를 첨부해주세요.'}
-                  </div>
+                  {galleryType === false &&
+                    <div className="preview_04_image">
+                      <div style={{ display: 'block' }}>
+                        {getImageList()}
+                      </div>
 
-                  {gallery.length > 0 &&
+                    </div>
+                  }
+
+                  {galleryType === true &&
                     <Slider>
-                      <div>{gallery.length}</div>
+                      {gallery.map((value, int) => (
+                        <img src={value}></img>
+                      ))}
                     </Slider>
                   }
                 </div>
@@ -502,7 +546,7 @@ const Main = () => {
             brideName={brideName} setBrideName={setBrideName}
             brideFather={brideFather} setBrideFather={setBrideFather}
             brideMather={brideMather} setBrideMather={setBrideMather}
-            brideRelative={brideRelative} setBriderRelative={setBriderRelative}
+            brideRelative={brideRelative} setBrideRelative={setBrideRelative}
 
             calendarStyle={calendarStyle} setCalendarStyle={setCalendarStyle}
 
@@ -526,6 +570,10 @@ const Main = () => {
             guide3={guide3} setGuide3={setGuide3}
 
             accountNumber={accountNumber} setAccountNumber={(value) => setAccountNumber(value)}
+
+            galleryType={galleryType} setGalleryType={setGalleryType}
+
+            forceUpdate={forceUpdate}
 
           />
 
