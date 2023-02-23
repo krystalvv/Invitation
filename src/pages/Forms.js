@@ -27,7 +27,6 @@ const Forms = (props) => {
 
 	function selectDirect(index) {
 		setDirect(index);
-		console.log(index);
 	}
 
 	function getAccountInfo(e, index, item) {
