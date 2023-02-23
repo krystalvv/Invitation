@@ -5,7 +5,7 @@ import Select from '../component/Select';
 import { Input, Row } from 'reactstrap';
 import { FileUploader } from "react-drag-drop-files";
 import InsertImage from '../component/InsertImage';
-
+import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps'
 
 const Forms = (props) => {
 	const colorChip = [
@@ -421,6 +421,17 @@ const Forms = (props) => {
 
 			</Card>
 			<Card title={"예식장 정보"}>
+				<div>
+				<MapDiv
+  style={{
+    height: 400,
+  }}
+>
+  <NaverMap>
+    <Marker defaultPosition={{ lat: 37.5666103, lng: 126.9783882 }} />
+  </NaverMap>
+</MapDiv>
+				</div>
 				<CardItem
 					title={'주소'}
 					renderItem={
