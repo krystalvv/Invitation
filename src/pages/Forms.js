@@ -35,7 +35,7 @@ const Forms = (props) => {
 	function getAccountInfo(e, index, item) {
 		let totalAccount = props.accountNumber;
 		let accountInfo;
-		if (direct === 0)
+		if (direct !== 0)
 			accountInfo = totalAccount.groom;
 		else
 			accountInfo = totalAccount.bride;
