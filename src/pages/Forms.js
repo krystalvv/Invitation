@@ -18,9 +18,7 @@ const Forms = (props) => {
 		{ name: 'Deep Blue', line: '#08113B', text: '#08113B', theme: '#242D56' },
 	]
 	const fileTypes = ["JPG", "PNG", "GIF"];
-	const [file, setFile] = useState(null);
 	const [direct, setDirect] = useState(0);
-	const [accountComponentList, setAccountComponent] = useState();
 
 	const [, updateState] = useState();
 	const forceUpdate = useCallback(()=>updateState({}), []);
@@ -62,9 +60,6 @@ const Forms = (props) => {
 	}
 
 	const handleChange = (file) => {
-		setFile(file);
-
-
 		let list = props.gallery;
 		list.push(URL.createObjectURL(file));
 
@@ -76,69 +71,6 @@ const Forms = (props) => {
 	function splite() {
 		return (
 			<div style={{ height: 1, backgroundColor: '#f5f5f5', marginTop: '1.0em', marginBottom: '1.0em' }} />
-		)
-	}
-
-	function accountGroom() {
-		let accountList = [];
-		let count = props.accountNumber.groom.length
-		let totalAccount = props.accountNumber;
-
-		let accountInfo = totalAccount.groom;
-
-		for (let i = 0; i < count; i++) {
-			let currentAccount = accountInfo[i]
-			console.log(direct, currentAccount.nickname)
-			accountList.push(
-				<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
-					<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='호칭' defaultValue={'asdfsad'} onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
-					</div>
-					<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='예금주' defaultValue={currentAccount.name} onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
-						<Input className='input' type="text" placeholder='은행'  defaultValue={currentAccount.bank} onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
-					</div>
-					<Input className='input' type="text" placeholder='계좌번호' defaultValue={currentAccount.account} onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
-				</div>
-			);
-		}
-
-		return (
-			<div>
-				{accountList}
-			</div>
-		)
-
-	}
-
-	function accountBride() {
-		let accountList = [];
-		let count = props.accountNumber.bride.length
-		let totalAccount = props.accountNumber;
-
-		let accountInfo = totalAccount.bride;
-
-		for (let i = 0; i < count; i++) {
-			let currentAccount = accountInfo[i]
-			console.log(direct, currentAccount.nickname)
-			accountList.push(
-				<div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginBottom: '1.0em' }}>
-					<div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='호칭' defaultValue={'eeee'} onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
-					</div>
-					<div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
-						<Input className='input' type="text" placeholder='예금주' defaultValue={currentAccount.name} onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
-						<Input className='input' type="text" placeholder='은행'  defaultValue={currentAccount.bank} onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
-					</div>
-					<Input className='input' type="text" placeholder='계좌번호' defaultValue={currentAccount.account} onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
-				</div>
-			);
-		}
-
-		return (
-			<div>
-				{accountList}
-			</div>
 		)
 	}
 
@@ -162,7 +94,6 @@ const Forms = (props) => {
 
 	const changeTime = (e) => {
 		let strTime = JSON.stringify(e.target.value).replace('"', '').split(':');
-		let time = props.date;
 
 		let formTime;
 		if (parseInt(strTime[0]) - 12 > 0)
@@ -185,8 +116,6 @@ const Forms = (props) => {
 		props.setCalendarStyle(index)
 	};
 
-	const update = useCallback()
-
 	const deleteImage = (i) => {
 		let list = props.gallery;
 		console.log(list)
@@ -201,7 +130,7 @@ const Forms = (props) => {
 		let images = [];
 		for (let i = 0; i < props.gallery.length; i++) {
 			images.push(<div style={{ width: 100, height: 100, margin: 5, cursor:'pointer' }} onClick={() => deleteImage(i)}>
-				<img src={props.gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }}/>
+				<img alt='list_img' src={props.gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }}></img>
 			</div>);
 		}
 
@@ -320,11 +249,6 @@ const Forms = (props) => {
 					renderItem={
 						<div className='filebox'>
 							<InsertImage setMainImage={setMainImage} />
-							{/* <div style={{ position: 'absolute', fontSize: '0.8em' }}>첨부할 파일을 여기에 끌어서 추가할 수 있습니다</div>
-
-							<div style={{ opacity: 0 }}>
-								<FileUploader handleChange={handleChange} name="file" />
-							</div> */}
 						</div>
 					}
 				/>

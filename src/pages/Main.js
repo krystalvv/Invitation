@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { addDays, parse } from 'date-fns';
+import { addDays } from 'date-fns';
 import 'moment/locale/ko';
 import Forms from './Forms';
 
@@ -114,7 +114,7 @@ const Main = () => {
     let images = [];
     for (let i = 0; i < gallery.length; i++) {
       images.push(<div style={{ width: 110, height: 110, margin: 5, cursor: 'pointer' }}>
-        <img src={gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }} />
+        <img alt='gallery' src={gallery[i]} style={{ width: "100%", height: "100%", margin: "5px" }} />
       </div>);
     }
 
@@ -183,7 +183,7 @@ const Main = () => {
 
                         <div className="preview_01_image" style={{ backgroundColor:templateImage?'white':'#e5e5e5',minHeight: templateImage ? 0 : 600 }}>
                           <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                            {templateImage ? <img style={{ width: "100%" }} src={templateImage}></img> : <div>
+                            {templateImage ? <img alt='preview' style={{ width: "100%" }} src={templateImage}></img> : <div>
                               {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
                             }
                           </div>
@@ -213,7 +213,7 @@ const Main = () => {
                               }
 
                               <div className="preview_01_image" style={{ backgroundColor: templateImage ? 'white' : '#e5e5e5', minHeight: templateImage ? 0 : 400 }}>
-                                {templateImage ? <img style={{ width: '100%' }} src={templateImage}></img> : <></>}
+                                {templateImage ? <img alt='preview' style={{ width: '100%' }} src={templateImage}></img> : <></>}
                                 <div style={{ flex: 1, display: 'flex', justifyContent: 'center'}}>
                                   {templateImage ? <div /> : <div>
                                     {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
@@ -224,7 +224,7 @@ const Main = () => {
                           }
                           {templateType === 1 &&
                             <div style={{ height: '100%', justifyContent: 'center', backgroundColor: templateImage ? 'white' : '#e5e5e5', alignItems: 'center', flexDirection: 'column', padding: "3%" }}>
-                              {templateImage ? <img style={{ position: 'absolute', width: '94%', border: '2px solid', borderColor: templateLineColor }} src={templateImage}></img> : 
+                              {templateImage ? <img alt='preview' style={{ position: 'absolute', width: '94%', border: '2px solid', borderColor: templateLineColor }} src={templateImage}></img> : 
                               <div style={{ position: 'absolute', height:'590px', width: '94%', border: '2px solid', borderColor: templateLineColor }}></div>}
                               <div style={{ position: 'absolute', minHeight: templateImage ? 0 : 570, width: '88%', display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: 10 }}>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'center', flexDirection: 'column', padding: 10 }}>
@@ -270,7 +270,7 @@ const Main = () => {
                                 </div>
                               }
                               <div className="preview_01_image" style={{ flex: 1, display: 'flex', border: '2px solid', borderColor: templateLineColor, margin: 10 }}>
-                                {templateImage && <img style={{ width: '100%' }} src={templateImage}></img>}
+                                {templateImage && <img alt='preview' style={{ width: '100%' }} src={templateImage}></img>}
                                 <div style={{ width:'100%', flex: 1, display: 'flex', justifyContent: 'center', alignItems:'center' }}>
                                   {templateImage ? <div /> : <div style={{textAlign:'center'}}>
                                     {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
@@ -364,7 +364,7 @@ const Main = () => {
                   {galleryType === true &&
                     <Slider>
                       {gallery.map((value, int) => (
-                        <img src={value}></img>
+                        <img alt='preview' src={value}></img>
                       ))}
                     </Slider>
                   }
@@ -378,6 +378,7 @@ const Main = () => {
                       <div style={{ fontSize: '1.5rem' }}>{address}</div>
                       <div>{detailAddress}</div>
                       <div>{number}</div>
+                      {false && <div>{assign}</div>}
                     </div>
                   </div>
                   <div className='preview_05_vehicle'>
