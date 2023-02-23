@@ -85,7 +85,7 @@ const Forms = (props) => {
 
 		let totalAccount = props.accountNumber;
 		let accountInfo;
-		if (direct === 0)
+		if (direct !== 0)
 			accountInfo = totalAccount.groom;
 		else
 			accountInfo = totalAccount.bride;
@@ -184,7 +184,7 @@ const Forms = (props) => {
 
 
 	return (
-		<form className="form">
+		<form className="form" onLoad={() => selectDirect(0)}>
 			<Card title={'템플릿'}>
 				<CardItem
 					title={'스타일'}
@@ -508,7 +508,7 @@ const Forms = (props) => {
 					title={'안내 1'}
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '200px' }}>
-							<Input style={{ flex: 1 }} className="input" type="text" placeholder='제목' onChange={(e) => { props.setGuide1({ title: e.target.value, title: props.guide1.title }) }}></Input>
+							<Input style={{ flex: 1 }} className="input" type="text" placeholder='제목' onChange={(e) => { props.setGuide1({ title: e.target.value, content: props.guide1.content }) }}></Input>
 							<Input style={{ flex: 6 }} className="textarea" type="textarea" placeholder='내용' onChange={(e) => { props.setGuide1({ title: props.guide1.title, content: e.target.value }) }}></Input>
 						</div>
 					} />
@@ -517,7 +517,7 @@ const Forms = (props) => {
 					title={'안내 2'}
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '200px' }}>
-							<Input style={{ flex: 1 }} className="input" type="text" placeholder='제목' onChange={(e) => { props.setGuide2({ title: e.target.value, title: props.guide2.title }) }}></Input>
+							<Input style={{ flex: 1 }} className="input" type="text" placeholder='제목' onChange={(e) => { props.setGuide2({ title: e.target.value, content: props.guide2.content }) }}></Input>
 							<Input style={{ flex: 6 }} className="textarea" type="textarea" placeholder='내용' onChange={(e) => { props.setGuide2({ title: props.guide2.title, content: e.target.value }) }}></Input>
 						</div>
 					} />
@@ -526,7 +526,7 @@ const Forms = (props) => {
 					title={'안내 3'}
 					renderItem={
 						<div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '200px' }}>
-							<Input style={{ flex: 1 }} className="input" type="text" placeholder='제목' onChange={(e) => { props.setGuide3({ title: e.target.value, title: props.guide3.title }) }}></Input>
+							<Input style={{ flex: 1 }} className="input" type="text" placeholder='제목' onChange={(e) => { props.setGuide3({ title: e.target.value, content: props.guide3.content }) }}></Input>
 							<Input style={{ flex: 6 }} className="textarea" type="textarea" placeholder='내용' onChange={(e) => { props.setGuide3({ title: props.guide3.title, content: e.target.value }) }}></Input>
 						</div>
 					} />

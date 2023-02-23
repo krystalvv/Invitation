@@ -213,8 +213,8 @@ const Main = () => {
                               }
 
                               <div className="preview_01_image" style={{ backgroundColor: templateImage ? 'white' : '#e5e5e5', minHeight: templateImage ? 0 : 400 }}>
-                                <img style={{ width: '100%' }} src={templateImage}></img>
-                                <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                                {templateImage ? <img style={{ width: '100%' }} src={templateImage}></img> : <></>}
+                                <div style={{ flex: 1, display: 'flex', justifyContent: 'center'}}>
                                   {templateImage ? <div /> : <div>
                                     {'[첫 화면] 에 이미지를 첨부해주세요.'} </div>
                                   }
@@ -224,25 +224,26 @@ const Main = () => {
                           }
                           {templateType === 1 &&
                             <div style={{ height: '100%', justifyContent: 'center', backgroundColor: templateImage ? 'white' : '#e5e5e5', alignItems: 'center', flexDirection: 'column', padding: "3%" }}>
-                              <img style={{ position: 'absolute', width: '94%', border: '2px solid', borderColor: templateLineColor }} src={templateImage}></img>
+                              {templateImage ? <img style={{ position: 'absolute', width: '94%', border: '2px solid', borderColor: templateLineColor }} src={templateImage}></img> : 
+                              <div style={{ position: 'absolute', height:'590px', width: '94%', border: '2px solid', borderColor: templateLineColor }}></div>}
                               <div style={{ position: 'absolute', minHeight: templateImage ? 0 : 570, width: '88%', display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: 10 }}>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'center', flexDirection: 'column', padding: 10 }}>
-                                  <div className="preview_01_name">
-                                    <div style={{ height: '20%' }}></div>
-                                    <div style={{ height: '80%' }}>
-                                      <div className="preview_01_name_01">
-                                        <div style={{ color: templateThemeColor, fontSize: 12 }}>{templateDate}</div>
-                                      </div>
-                                      <div className="preview_01_name_02">
-                                        <div className="preview_01_name_02_text_01" style={{ color: templateThemeColor }}>{templateGroom}</div>
-                                        <div style={{ color: templateThemeColor, fontSize: 20, width: 100, textAlign: 'center' }}>&</div>
-                                        <div className="preview_01_name_02_text_03" style={{ color: templateThemeColor }}>{templateBride}</div>
-                                      </div>
-                                      <div style={{ textAlign: 'center', fontSize: 11, marginTop: -15 }}>
-                                        {templateSpace}
-                                      </div>
+                                <div className="preview_01_name">
+                                  <div style={{ height: '20%' }}></div>
+                                  <div style={{ height: '80%' }}>
+                                    <div className="preview_01_name_01">
+                                      <div style={{ color: templateThemeColor, fontSize: 12 }}>{templateDate}</div>
+                                    </div>
+                                    <div className="preview_01_name_02">
+                                      <div className="preview_01_name_02_text_01" style={{ color: templateThemeColor }}>{templateGroom}</div>
+                                      <div style={{ color: templateThemeColor, fontSize: 20, width: 100, textAlign: 'center' }}>&</div>
+                                      <div className="preview_01_name_02_text_03" style={{ color: templateThemeColor }}>{templateBride}</div>
+                                    </div>
+                                    <div style={{ textAlign: 'center', fontSize: 11, marginTop: -15 }}>
+                                      {templateSpace}
                                     </div>
                                   </div>
+                                </div>
                                 </div>
                               </div>
 
@@ -372,12 +373,12 @@ const Main = () => {
                 <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
                   <div style={{ marginBottom: '4em' }}>
                     <div className='preview_04_title' style={{ color: templateThemeColor }}>오시는 길</div>
+                    <div className='preview_04_splite' style={{marginBottom:30}}></div>
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                       <div style={{ fontSize: '1.5rem' }}>{address}</div>
                       <div>{detailAddress}</div>
                       <div>{number}</div>
                     </div>
-                    <div className='preview_04_splite'></div>
                   </div>
                   <div className='preview_05_vehicle'>
                     <div>
