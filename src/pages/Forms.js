@@ -7,6 +7,8 @@ import { FileUploader } from "react-drag-drop-files";
 import InsertImage from '../component/InsertImage';
 import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
 
+import images from '../image/naver_map.png'
+
 const Forms = (props) => {
     // static value
     const colorChip = [
@@ -21,7 +23,6 @@ const Forms = (props) => {
     const fileTypes = ["JPG", "PNG", "GIF"];
 
     const order = ['인사말', '캘린더', '식전 영상', '갤러리', '오시는 길', '안내사항', '방명록', '마음 전하실 곳']
-
     
     // input value - 나중에 적용...
     const [inputs, setInputs] = useState({
@@ -85,6 +86,7 @@ const Forms = (props) => {
     };
 
     const [direct, setDirect] = useState(0);
+    const [mapType, setMapType] = useState(true);
 
     const [, updateState] = useState();
     const forceUpdate = useCallback(() => updateState({}), []);
@@ -487,6 +489,28 @@ const Forms = (props) => {
 
             </Card>
             <Card title={"예식장 정보"}>
+            <CardItem
+                    title={'타입'}
+                    renderItem={
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
+                            <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+                                <Input className="radio" type='radio' checked={mapType === true} onChange={() => setMapType(true)}></Input>
+                                <div style={{ fontSize: '0.9em' }}>네이버 지도</div>
+                            </div>
+                            <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+                                <Input className="radio" type='radio' checked={mapType === false} onChange={() => setMapType(false)}></Input>
+                                <div style={{ fontSize: '0.9em' }} >약도</div>
+                            </div>
+                        </div>
+                    }
+                />
+                <CardItem
+                    title={'지도'}
+                    renderItem={
+                <div>
+                    <img src={images}></img>
+                </div>
+                    } />
                 {/* <div>
                     <MapDiv
                         style={{

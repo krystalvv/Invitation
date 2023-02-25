@@ -29,7 +29,7 @@ const Main = () => {
   function handleScroll() {
     const scrollTop = document.getElementById('preview')?.scrollTop;
     setScrollY(scrollTop);		// 스크롤 이벤트가 시작되면 요값이 변경된다
-    console.log(scrollTop);
+    // console.log(scrollTop);
   }
 
   //# useState
@@ -192,7 +192,6 @@ const Main = () => {
           <div id="preview" className="preview">
             <div style={{ borderWidth: "1px" }}>
               <div className="preview_scroll">
-                {scrollY >= 0 &&
                   <Fade bottom>
                     <div style={{ marginBottom: '4em' }}>
                       <div className="preview_01">
@@ -304,7 +303,6 @@ const Main = () => {
                       </div>
                     </div>
                   </Fade>
-                }
 
                 {scrollY >= 437 &&
                   <Fade bottom>
