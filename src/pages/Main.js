@@ -26,6 +26,19 @@ const Main = () => {
     };
   }, []);
 
+  function copyLink (value) {
+
+    let t = document.createElement("textarea");
+    document.body.appendChild(t);
+    t.value = value.bank + value.account;
+    t.select();
+    document.execCommand('copy');
+    document.body.removeChild(t);
+
+    alert(t.value + ' 클립보드에 복사되었습니다.')
+
+}
+
   function handleScroll() {
     const scrollTop = document.getElementById('preview')?.scrollTop;
     setScrollY(scrollTop);		// 스크롤 이벤트가 시작되면 요값이 변경된다
@@ -506,7 +519,10 @@ const Main = () => {
                                     </div>
                                   </div>
                                   <div className="preview_07_combo_box_button">
-                                    <div className="preview_07_combo_box_label">계좌 복사하기</div>
+                                    <div className="preview_07_combo_box_label"           
+                                    onMouseDown={(e) => {e.preventDefault()}}
+                                    onClick={()=>copyLink(value)}
+                                    >계좌 복사하기</div>
                                   </div>
                                 </div>
                               </div>
@@ -542,7 +558,10 @@ const Main = () => {
                                     </div>
                                   </div>
                                   <div className="preview_07_combo_box_button">
-                                    <div className="preview_07_combo_box_label">계좌 복사하기</div>
+                                    <div className="preview_07_combo_box_label"           
+                                    onMouseDown={(e) => {e.preventDefault()}}
+                                    onClick={()=>copyLink(value)}
+                                    >계좌 복사하기</div>
                                   </div>
                                 </div>
                               </div>

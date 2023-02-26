@@ -8,6 +8,8 @@ import InsertImage from '../component/InsertImage';
 import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
 
 import images from '../image/naver_map.png'
+import DragAndDrop from '../component/DragAndDrop';
+import AdditiolnalInput from '../component/AdditionalInput';
 
 const Forms = (props) => {
     // static value
@@ -20,6 +22,9 @@ const Forms = (props) => {
         { name: 'Purple Violet', line: '#908394', text: '#41354D', theme: '#65566D' },
         { name: 'Deep Blue', line: '#08113B', text: '#08113B', theme: '#242D56' },
     ]
+
+    const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Black', 'White', 'Orange'];
+
     const fileTypes = ["JPG", "PNG", "GIF"];
 
     const order = ['인사말', '캘린더', '식전 영상', '갤러리', '오시는 길', '안내사항', '방명록', '마음 전하실 곳']
@@ -211,10 +216,10 @@ const Forms = (props) => {
         )
 
     }
-
-
+    
     return (
         <form className="form">
+
             <Card title={'템플릿'}>
                 <CardItem
                     title={'스타일'}
@@ -504,6 +509,7 @@ const Forms = (props) => {
                         </div>
                     }
                 />
+                { mapType === true &&
                 <CardItem
                     title={'지도'}
                     renderItem={
@@ -511,6 +517,20 @@ const Forms = (props) => {
                     <img src={images}></img>
                 </div>
                     } />
+                }
+                                { mapType === false &&
+                        <CardItem
+                        title={'약도'}
+                        renderItem={
+                            <div className='filebox'>
+                                <div style={{ position: 'absolute', fontSize: '0.8em' }}>첨부할 파일을 여기에 끌어서 추가할 수 있습니다</div>
+    
+                                <div style={{ opacity: 0 }}>
+                                    <FileUploader fileTypes={fileTypes} handleChange={handleChange} name="file" />
+                                </div>
+                            </div>
+                        }
+                    />}
                 {/* <div>
                     <MapDiv
                         style={{
@@ -625,6 +645,8 @@ const Forms = (props) => {
                                     </div>
                                 ))
                             }
+
+<AdditiolnalInput/>
                         </div>
                     }
                 />
@@ -847,20 +869,14 @@ const Forms = (props) => {
                     title={'순서변경'}
                     renderItem={
                         <div style={{display:'flex', flex:1, flexDirection:'column'}}>
-							<div class="input">인사말</div>
-							<div class="input">캘린더</div>
-							<div class="input">식전영상</div>
-							<div class="input">갤러리</div>
-							<div class="input">오시는 길</div>
-							<div class="input">안내사항</div>
-							<div class="input">방명록</div>
-							<div class="input">마음 전하실 곳</div>
+                <DragAndDrop colors={order}></DragAndDrop>
 
                             
                         </div>
                     }
                 />
                 {splite()}
+
             </Card>
 
         </form>
