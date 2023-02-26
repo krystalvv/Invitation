@@ -304,9 +304,9 @@ const Forms = (props) => {
                 <CardItem
                     title={'이름'}
                     renderItem={
-                        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'row' }}>
-                            <Input className="input" type='text' placeholder='신랑' onChange={(e) => { props.setTemplateGroom(e.target.value) }}></Input>
-                            <Input className="input" type='text' placeholder='신부' onChange={(e) => { props.setTemplateBride(e.target.value) }}></Input>
+                        <div className='select'>
+                            <Input className="select_control" type='text' placeholder='신랑' onChange={(e) => { props.setTemplateGroom(e.target.value) }}></Input>
+                            <Input className="select_control" type='text' placeholder='신부' onChange={(e) => { props.setTemplateBride(e.target.value) }}></Input>
                         </div>
                     }
                 />
@@ -347,9 +347,9 @@ const Forms = (props) => {
                 <CardItem
                     title={'신랑'}
                     renderItem={
-                        <div style={{ flex: 1, display: 'flex' }}>
-                            <Input className="input" type='text' placeholder='이름' onChange={(e) => { props.setGroomName(e.target.value) }}></Input>
-                            <Input className="input" type='text' placeholder='관계' onChange={(e) => { props.setGroomRelative(e.target.value) }}></Input>
+                        <div className='select'>
+                            <Input className="select_control" type='text' placeholder='이름' onChange={(e) => { props.setGroomName(e.target.value) }}></Input>
+                            <Input className="select_control" type='text' placeholder='관계' onChange={(e) => { props.setGroomRelative(e.target.value) }}></Input>
                         </div>
 
                     }
@@ -379,9 +379,9 @@ const Forms = (props) => {
                 <CardItem
                     title={'신부'}
                     renderItem={
-                        <div style={{ flex: 1, display: 'flex' }}>
-                            <Input className="input" type='text' placeholder='이름' onChange={(e) => { props.setBrideName(e.target.value) }} />
-                            <Input className="input" type='text' placeholder='관계' onChange={(e) => { props.setBrideRelative(e.target.value) }} />
+                        <div className='select'>
+                            <Input className="select_control" type='text' placeholder='이름' onChange={(e) => { props.setBrideName(e.target.value) }} />
+                            <Input className="select_control" type='text' placeholder='관계' onChange={(e) => { props.setBrideRelative(e.target.value) }} />
                         </div>
 
                     }
@@ -514,7 +514,7 @@ const Forms = (props) => {
                     title={'지도'}
                     renderItem={
                 <div>
-                    <img src={images}></img>
+                    <img src={images} style={{width:'100%'}}></img>
                 </div>
                     } />
                 }
@@ -557,9 +557,9 @@ const Forms = (props) => {
                 <CardItem
                     title={'연락처'}
                     renderItem={
-                        <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-                            <Input className="input" type='text' placeholder='담당자' onChange={(e) => { props.setAssign(e.target.value) }} />
-                            <Input className="input" type='text' placeholder='연락처' onChange={(e) => { props.setNumber(e.target.value) }} />
+                        <div className='select'>
+                            <Input className="select_control" type='text' placeholder='담당자' onChange={(e) => { props.setAssign(e.target.value) }} />
+                            <Input className="select_control" type='text' placeholder='연락처' onChange={(e) => { props.setNumber(e.target.value) }} />
                         </div>
 
 
@@ -637,16 +637,15 @@ const Forms = (props) => {
                                         <div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
                                             <Input className='input' type="text" placeholder='호칭' onChange={(e) => getAccountInfo(e, i, '호칭')}></Input>
                                         </div>
-                                        <div style={{ display: 'flex', flex: 2, flexDirection: 'row' }}>
-                                            <Input className='input' type="text" placeholder='예금주' onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
-                                            <Input className='input' type="text" placeholder='은행' onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
+                                        <div className='select'>
+                                            <Input className='select_control' type="text" placeholder='예금주' onChange={(e) => getAccountInfo(e, i, '예금주')}></Input>
+                                            <Input className='select_control' type="text" placeholder='은행' onChange={(e) => getAccountInfo(e, i, '은행')}></Input>
                                         </div>
                                         <Input className='input' type="text" placeholder='계좌번호' onChange={(e) => getAccountInfo(e, i, '계좌번호')}></Input>
                                     </div>
                                 ))
                             }
 
-<AdditiolnalInput/>
                         </div>
                     }
                 />
@@ -742,9 +741,9 @@ const Forms = (props) => {
                     title={'참석여부'}
                     renderItem={
                         <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }} >
-                            <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }}>
-                                <Input className="input" type='text' placeholder='버튼 이름' />
-                                <Input className="input" type='text' placeholder='구글 폼 URL' />
+                            <div className='select'>
+                                <Input className="select_control" type='text' placeholder='버튼 이름' />
+                                <Input className="select_control" type='text' placeholder='구글 폼 URL' />
                             </div>
                             <Row style={{ display: 'flex', justifyContent: 'right' }}>
                                 <div style={{ fontSize: '0.8em', textDecoration: 'underline' }}>참석 여부 등록하는 방법</div>
