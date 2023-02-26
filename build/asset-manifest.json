@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.4306da39.css",
-    "main.js": "/static/js/main.9594a144.js",
-    "static/js/787.d0f4f082.chunk.js": "/static/js/787.d0f4f082.chunk.js",
-    "index.html": "/index.html",
-    "main.4306da39.css.map": "/static/css/main.4306da39.css.map",
-    "main.9594a144.js.map": "/static/js/main.9594a144.js.map",
-    "787.d0f4f082.chunk.js.map": "/static/js/787.d0f4f082.chunk.js.map"
+    "main.css": "/krystalvv.github.io/Invitation/static/css/main.261a5dde.css",
+    "main.js": "/krystalvv.github.io/Invitation/static/js/main.f0b9805f.js",
+    "static/js/787.d0f4f082.chunk.js": "/krystalvv.github.io/Invitation/static/js/787.d0f4f082.chunk.js",
+    "static/media/naver_map.png": "/krystalvv.github.io/Invitation/static/media/naver_map.bfc96e9f9cc347037bc2.png",
+    "index.html": "/krystalvv.github.io/Invitation/index.html",
+    "main.261a5dde.css.map": "/krystalvv.github.io/Invitation/static/css/main.261a5dde.css.map",
+    "main.f0b9805f.js.map": "/krystalvv.github.io/Invitation/static/js/main.f0b9805f.js.map",
+    "787.d0f4f082.chunk.js.map": "/krystalvv.github.io/Invitation/static/js/787.d0f4f082.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4306da39.css",
-    "static/js/main.9594a144.js"
+    "static/css/main.261a5dde.css",
+    "static/js/main.f0b9805f.js"
   ]
 }

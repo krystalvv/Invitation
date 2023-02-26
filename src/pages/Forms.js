@@ -5,11 +5,9 @@ import Select from '../component/Select';
 import { Input, Row } from 'reactstrap';
 import { FileUploader } from "react-drag-drop-files";
 import InsertImage from '../component/InsertImage';
-import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
 
 import images from '../image/naver_map.png'
 import DragAndDrop from '../component/DragAndDrop';
-import AdditiolnalInput from '../component/AdditionalInput';
 
 const Forms = (props) => {
     // static value
