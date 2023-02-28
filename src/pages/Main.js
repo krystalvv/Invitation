@@ -24,7 +24,7 @@ const Main = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll); 		// 스크롤 이벤트 제거
     };
-  }, []);
+  }, [scrollY]);
 
   function copyLink (value) {
 
@@ -205,8 +205,9 @@ const Main = () => {
           <div id="preview" className="preview">
             <div style={{ borderWidth: "1px" }}>
               <div className="preview_scroll">
-                  <Fade bottom>
-                    <div style={{ marginBottom: '4em' }}>
+
+                <Fade bottom><div style={{width:'100%', height: 700}}>
+                <div style={{ marginBottom: '4em'}}>
                       <div className="preview_01">
                         <div style={{ width: '100%', height: '100%' }}>
                           {templateStyle === 1 &&
@@ -315,11 +316,9 @@ const Main = () => {
 
                       </div>
                     </div>
-                  </Fade>
-
-                {scrollY >= 437 &&
-                  <Fade bottom>
-                    <div style={{ padding: '4em 2em' }}>
+                  </div></Fade>
+                {scrollY >= 100 &&<Fade bottom><div style={{width:'100%', height: 700}}>
+                <div style={{ height : 400, padding: '4em 2em'}}>
                       <div className="preview_02_title" style={{ color: templateThemeColor }}>{title}</div>
                       <div style={{ paddingTop: '4em', textAlign: 'center' }}>
                         <p className="preview_02_content">
@@ -335,14 +334,10 @@ const Main = () => {
                           <div style={{ fontWeight: 'bold' }}>{brideFather}•{brideMather.leaved ? '故' + brideMather.name : brideMather.name}</div><div style={{ fontSize: 13, color: '#8c8c8c' }}>&nbsp;의&nbsp;{brideRelative}</div>&nbsp;<div style={{ fontWeight: 'bold' }}> {brideName}</div>
                         </div>
                       </div>
-                    </div>
-                  </Fade>
-                }
-
-                {scrollY >= 1070 &&
-                  <Fade bottom>
-
-                    <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
+                    </div></div></Fade>}
+                {scrollY >= 700 &&<Fade bottom><div style={{width:'100%', height: 700}}>
+                  
+                <div style={{paddingTop: '4em', paddingBottom: '4em' }}>
                       <div className="preview_03">
                         <div style={{ paddingBottom: '2rem' }}>
                           <div className="preview_03_month" style={{ color: templateThemeColor }} key={date}>{date.getMonth() + 1}월 {date.getDate()}일</div>
@@ -379,11 +374,9 @@ const Main = () => {
                         </div>
                       </div>
                     </div>
-                  </Fade>
-                }
-                {scrollY >= 1373 &&
-                 <Fade bottom>
-                    <div style={{ overflow: 'hidden', paddingTop: '4em', paddingBottom: '4em' }}>
+                     </div></Fade>}
+                {scrollY >= 1100 &&<Fade bottom><div style={{width:'100%', height: 700}}>
+                <div style={{ overflow: 'hidden', paddingTop: '4em', paddingBottom: '4em' }}>
                       <div style={{ paddingBottom: '2rem' }}>
                         <div>
                           <div className='preview_04_title' style={{ color: templateThemeColor }}>갤러리</div>
@@ -410,12 +403,9 @@ const Main = () => {
                         </Slider>
                       }
                     </div>
-                  </Fade>
-                }
-
-                {scrollY >= 1430 &&
-                  <Fade bottom>
-                    <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
+                    </div></Fade>}
+                {scrollY >= 1900 &&<Fade bottom><div style={{width:'100%', height: 700}}>
+                <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
                       <div style={{ marginBottom: '4em' }}>
                         <div className='preview_04_title' style={{ color: templateThemeColor }}>오시는 길</div>
                         <div className='preview_04_splite' style={{ marginBottom: 30 }}></div>
@@ -453,13 +443,9 @@ const Main = () => {
                         </div>
                       </div>
                     </div>
-                  </Fade>
-                }
-
-                {scrollY >= 1930 &&
-                  <Fade bottom>
-
-                    <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
+                    </div></Fade>}
+                {scrollY >= 2600 &&<Fade bottom><div style={{width:'100%', height: 700}}>
+                <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
                       <div>
                         <div className='preview_04_title' style={{ color: templateThemeColor }}>방명록</div>
                         <div className='preview_04_splite'></div>
@@ -479,13 +465,9 @@ const Main = () => {
                         </div>
                       </div>
                     </div>
-                  </Fade>
-                }
-
-                {scrollY >= 2435 &&
-                  <Fade bottom>
-
-                    <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
+                    </div></Fade>}
+                {scrollY >= 3000 &&<Fade bottom><div style={{width:'100%', height: 900}}>
+                <div style={{ paddingTop: '4em', paddingBottom: '4em' }}>
                       <div>
                         <div className='preview_04_title' style={{ color: templateThemeColor }}>마음 전하실 곳</div>
                         <div className='preview_04_splite'></div>
@@ -582,8 +564,9 @@ const Main = () => {
                         </div>
                       </div>
                     </div>
-                  </Fade>
-                }
+                    </div></Fade>}
+
+
               </div>
             </div>
 

@@ -26,67 +26,6 @@ const Forms = (props) => {
     const fileTypes = ["JPG", "PNG", "GIF"];
 
     const order = ['인사말', '캘린더', '식전 영상', '갤러리', '오시는 길', '안내사항', '방명록', '마음 전하실 곳']
-    
-    // input value - 나중에 적용...
-    const [inputs, setInputs] = useState({
-        template_type: 0,
-        template_line_color: '#000',
-        template_text_color: '#000',
-        template_theme_color: '#000',
-        template_date: '00 | 00',
-        template_groom_name: '신랑 이름',
-        template_bride_name: '신부 이름',
-        template_space: '',
-        template_image: '',
-        message_title: '초대합니다',
-        message_content: '[청첩장 문구]에 내용을 입력해주세요.',
-        groom_name: '',
-        groom_father: '',
-        groom_mather: '',
-        groom_relative: '',
-        bride_name: '',
-        bride_father: '',
-        bride_mather: '',
-        bride_relative: '',
-        calendar_style: 0,
-        date: new Date(),
-        time: '',
-        set_dDay: true,
-        gallery_type: true,
-        gallery: [],
-        address: '',
-        detail_address: '',
-        assign: '',
-        assign_number: '',
-        guide: [{ type: '지하철', content: '' }, { type: '버스', content: '' }, { type: '자가용', content: '' }],
-        groom_account: [{ nickname: '신랑', name: '', account: '', bank: '' }, { nickname: '아버님', name: '', account: '', bank: '' }, { nickname: '어머님', name: '', account: '', bank: '' }],
-        bride_account: [{ nickname: '신랑', name: '', account: '', bank: '' }, { nickname: '아버님', name: '', account: '', bank: '' }, { nickname: '어머님', name: '', account: '', bank: '' }],
-        map_type: true
-    })
-
-    const { template_style, template_type, template_line_color, template_text_color,
-        template_theme_color, template_date, template_groom_name, template_bride_name,
-        template_space, template_image, message_title, message_content,
-        groom_name, groom_father, groom_mather, groom_relative,
-        bride_name, bride_father, bride_mather, bride_relative,
-        calendar_style, date, time, set_dDay,
-        gallery_type, gallery,
-        address, detail_address, assign, assign_number,
-        guide, groom_accout, bride_account, map_type
-    } = inputs;
-
-    const onChange = e => {
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value
-        });
-
-        // parent
-        props.setInputData({
-            ...inputs,
-            [e.target.name]: e.target.value
-        })
-    };
 
     const [direct, setDirect] = useState(0);
     const [mapType, setMapType] = useState(true);
