@@ -27,6 +27,7 @@ const Forms = (props) => {
 
     const order = ['인사말', '캘린더', '식전 영상', '갤러리', '오시는 길', '안내사항', '방명록', '마음 전하실 곳']
 
+
     const [direct, setDirect] = useState(0);
     const [mapType, setMapType] = useState(true);
 
