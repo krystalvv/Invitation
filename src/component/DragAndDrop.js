@@ -40,7 +40,7 @@ function DragAndDrop() {
                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                           <div style={{flex:1, display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
                           <div>{ name }</div>
-                          <div>숨기기</div>
+                          <div>::</div>
                           </div>
                         </li>
                       )}
